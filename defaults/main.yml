@@ -11,8 +11,8 @@ alerta_mongod_dept: false # A boolean value, whether MongoDB database use the sa
 
 # Listen port #
 alerta_port_arg:
-  api: '8080' # The port number of API.
-  webui: '8000' # The port number of Web UI.
+  api: '19199' # The port number of API.
+  webui: '19198' # The port number of Web UI.
 
 # MongoDB parameters #
 alerta_mongod_auth: false # A boolean value, Enable or Disable MongoDB authentication.
@@ -42,7 +42,7 @@ alerta_mongod_backupset_arg: # Defines backup parameters.
 alerta_arg:
   user: 'alerta' # System user name for running Alerta services.
   auth_provider: 'basic' # Defines authentication providers.
-  signup_enabled: false # Whether prevent sign-up of new users via the web UI.
+  signup_enabled: 'False' # Whether prevent sign-up of new users via the web UI.
   log_max_mib: '25' # Maximum mebibyte size of log file before rollover.
   log_backup_count: '10' # Number of rollover files before older files are deleted.
   log_format: 'verbose' # Defines log file formatter.

@@ -4,6 +4,5 @@ alerta_epel_repo_url: 'http://mirrors.tuna.tsinghua.edu.cn/epel/{{ ansible_distr
 
 alerta_dependent_package:
   - 'python36'
-  - 'python36-pip'
-  - 'python36-virtualenv'
+  - 'python3-pip'
   - 'git'

@@ -1,14 +1,17 @@
 ---
+- name: Gather Alerta plugins list variables.
+  set_fact:
+    alerta_plugin_list: "{{ lookup('dict', alerta_plugins, wantlist=True) | json_query('[*].key') }}"
+
 - name: Install Alerta dependence plugins.
   pip:
     name: 'git+https://github.com/alerta/alerta-contrib.git#subdirectory=plugins/{{ item }}'
-    state: 'forcereinstall'
-    virtualenv_command: '/bin/virtualenv-3'
-    virtualenv_python: '/bin/python3'
-    executable: '/usr/local/bin/pip3'
-    extra_args: '--ignore-installed'
-  loop: "{{ lookup('dict', alerta_plugins) | json_query('[*].key') }}"
+    state: 'present'
+    executable: '/usr/bin/pip3'
+  environment:
+    no_proxy: '*'
+  loop: "{{ alerta_plugin_list }}"
   register: alerta_plugins_update
   until: alerta_plugins_update is succeeded
-  retries: 3
-  delay: 5
+  retries: 10
+  delay: 2

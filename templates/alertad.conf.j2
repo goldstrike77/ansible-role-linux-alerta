@@ -6,16 +6,16 @@ AUTH_REQUIRED = True
 SECRET_KEY = '{{ lookup('password', '' + alerta_cluster + ':authentication:tokens length=32 chars=ascii_letters,digits') }}'
 AUTH_PROVIDER = '{{ alerta_arg.auth_provider }}'
 ADMIN_USERS = ['{{ alerta_admin_user }}']
-SIGNUP_ENABLED = alerta_arg.signup_enabled | bool | to_json
+SIGNUP_ENABLED = {{ alerta_arg.signup_enabled }}
 LOG_HANDLERS = ['console', 'file']
 LOG_FILE = '/var/log/alertad/alertad.log'
-LOG_MAX_BYTES = {{ alerta_arg.log_max_mib }}}*1024*1024
+LOG_MAX_BYTES = {{ alerta_arg.log_max_mib }}*1024*1024
 LOG_BACKUP_COUNT = {{ alerta_arg.log_backup_count }}
 LOG_FORMAT = '{{ alerta_arg.log_format }}'
-{% if alerta_plugins is defined %}
-PLUGINS = {{ lookup('dict', alerta_plugins) | json_query('[*].key') }}
+{% if alerta_plugin_list is defined %}
+PLUGINS = ['{{ alerta_plugin_list | list | join("','") }}']
 {% endif %}
-{% if 'prometheus' in (lookup('dict', alerta_plugins) | json_query('[*].key')) %}
-ALERTMANAGER_API_URL = '{{ alerta_plugins.prometheus.alertmanager_api_url | default('http://127.0.0.1:9093') }}'
-ALERTMANAGER_SILENCE_DAYS = {{ alerta_plugins.prometheus.alertmanager_silence_days | default('2') }}
+{% if alerta_plugin_list is defined and  'prometheus' in alerta_plugin_list %}
+ALERTMANAGER_API_URL = '{{ (lookup('dict', alerta_plugins, wantlist=True ) | json_query('[?key==`prometheus`].value[0].alertmanager_api_url'))[0] | default('http://127.0.0.1:9093') }}'
+ALERTMANAGER_SILENCE_DAYS = {{ (lookup('dict', alerta_plugins, wantlist=True ) | json_query('[?key==`prometheus`].value[0].alertmanager_silence_days'))[0] | default('2') }}
 {% endif %}

@@ -13,6 +13,7 @@ alerta_conf_scripts:
   - { src: 'alertad.conf.j2', dest: '/etc/alertad.conf' }
   - { src: 'alertad.service.j2', dest: '/lib/systemd/system/alertad.service' }
   - { src: 'alerta-webui.service.j2', dest: '/lib/systemd/system/alerta-webui.service' }
+  - { src: 'config.json.j2', dest: '{{ alerta_dist_path }}/alerta/config.json' }
 
 alerta_servers: "\
   {% set _alerta_servers = [] %}\

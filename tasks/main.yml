@@ -14,11 +14,9 @@
 - name: Install Alerta dependence python package.
   pip:
     name: '{{ alerta_python_dependent_packages }}'
-    state: 'forcereinstall'
-    virtualenv_command: '/bin/virtualenv-3'
-    virtualenv_python: '/bin/python3'
-    executable: '/usr/local/bin/pip3'
-    extra_args: '--ignore-installed -i {{ alerta_pypi_url }}'
+    state: 'present'
+    executable: '/usr/bin/pip3'
+    extra_args: '-i {{ alerta_pypi_url }}'
   register: alerta_python_dependent_packages_update
   until: alerta_python_dependent_packages_update is succeeded
   retries: 3
@@ -43,8 +41,8 @@
   file:
     dest: '{{ item }}'
     state: 'directory'
-    owner: '{{ {{ alerta_arg.user }} }}'
-    group: '{{ {{ alerta_arg.user }} }}'
+    owner: '{{ alerta_arg.user }}'
+    group: '{{ alerta_arg.user }}'
     mode: '0755'
   loop: '{{ alerta_folder }}'
 
@@ -57,10 +55,12 @@
     extra_opts: [--strip-components=1]
     remote_src: 'yes'
     validate_certs: 'no'
+  environment:
+    no_proxy: '*'
   register: alerta_webui_update
   until: alerta_webui_update is succeeded
-  retries: 3
-  delay: 5
+  retries: 10
+  delay: 2
 
 - name: Alerta Configure & Scripts file transfer.
   template:
@@ -70,6 +70,7 @@
     group: 'root'
     mode: '0664'
   loop: '{{ alerta_conf_scripts }}'
+  register: alerta_conf_update
 
 - name: Enable Alerta authentication.
   include: 'authentication.yml'
@@ -78,7 +79,7 @@
 - name: Reload the other Alerta service.
   shell: echo ''
   notify: 'Ensure Alerta service is enabled'
-  when: alerta_webui_update is changed or alerta_python_dependent_packages_update is changed or alerta_plugins_update is changed
+  when: alerta_webui_update is changed or alerta_python_dependent_packages_update is changed or alerta_plugins_update is changed or alerta_conf_update is changed
 
 - name: Force the handler to run immediately.
   meta: flush_handlers
