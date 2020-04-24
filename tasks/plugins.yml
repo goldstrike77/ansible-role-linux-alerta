@@ -1,0 +1,14 @@
+---
+- name: Install Alerta dependence plugins.
+  pip:
+    name: 'git+https://github.com/alerta/alerta-contrib.git#subdirectory=plugins/{{ item }}'
+    state: 'forcereinstall'
+    virtualenv_command: '/bin/virtualenv-3'
+    virtualenv_python: '/bin/python3'
+    executable: '/usr/local/bin/pip3'
+    extra_args: '--ignore-installed'
+  loop: "{{ lookup('dict', alerta_plugins) | json_query('[*].key') }}"
+  register: alerta_plugins_update
+  until: alerta_plugins_update is succeeded
+  retries: 3
+  delay: 5

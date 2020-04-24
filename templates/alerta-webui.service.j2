@@ -1,0 +1,19 @@
+[Unit]
+Description=Alerta web UI service
+Documentation=https://github.com/alerta/alerta-webui
+After=network.target
+
+[Service]
+WorkingDirectory=/{{ alerta_dist_path }}/alerta
+ExecStart=/bin/python3 -m http.server {{ alerta_port_arg.webui }}
+User={{ alerta_arg.user }}
+Type=idle
+StandardInput=tty-force
+StandardError=syslog
+LimitNOFILE=8192
+LimitNPROC=8192
+Restart=always
+RestartSec=20
+
+[Install]
+WantedBy=multi-user.target

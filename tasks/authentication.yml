@@ -1,0 +1,9 @@
+---
+- name: Create admin users and key.
+  shell: '{{ item }}'
+  loop:
+    - '/usr/local/bin/alertad user --all --password "{{ alerta_admin_pass }}"'
+    - '/usr/local/bin/alertad key --all'
+  no_log: true
+  changed_when: false
+  failed_when: false

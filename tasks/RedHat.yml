@@ -1,0 +1,23 @@
+---
+- name: Include OS-specific variables.
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: Add EPEL YUM repositories.
+  yum_repository:
+    name: '{{ alerta_epel_repo_name }}'
+    description: '{{ alerta_epel_repo_name }} YUM repo'
+    file: '{{ alerta_epel_repo_name }}'
+    baseurl: '{{ alerta_epel_repo_url }}'
+    gpgcheck: 'no'
+    timeout: '60'
+
+- name: Install the Alerta dependent packages.
+  yum:
+    name: '{{ alerta_dependent_package }}'
+    state: 'present'
+    validate_certs: 'no'
+    disable_gpg_check: 'yes'
+  register: yum_status
+  until: yum_status is succeeded
+  retries: 3
+  delay: 5

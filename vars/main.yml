@@ -1,2 +1,27 @@
 ---
-# vars file for ansible-role-linux-alerta
+alerta_pypi_url: 'https://mirrors.aliyun.com/pypi/simple/'
+
+alerta_python_dependent_packages:
+  - 'alerta'
+  - 'alerta-server'
+
+alerta_folder:
+  - '{{ alerta_dist_path }}/alerta'
+  - '/var/log/alerta'
+
+alerta_conf_scripts:
+  - { src: 'alertad.conf.j2', dest: '/etc/alertad.conf' }
+  - { src: 'alertad.service.j2', dest: '/lib/systemd/system/alertad.service' }
+  - { src: 'alerta-webui.service.j2', dest: '/lib/systemd/system/alerta-webui.service' }
+
+alerta_servers: "\
+  {% set _alerta_servers = [] %}\
+  {% for host in groups[group_names[-1]] %}\
+    {% if hostvars[host]['alerta_cluster'] is defined %}\
+      {% set _alerta_cluster = hostvars[host]['alerta_cluster'] | default('') %}\
+      {% if ( _alerta_cluster == hostvars[host]['alerta_cluster']) %}\
+        {% if _alerta_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
+      {% endif %}\
+    {% endif %}\
+  {% endfor %}\
+  {{ _alerta_servers }}"

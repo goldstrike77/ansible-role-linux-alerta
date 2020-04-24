@@ -1,0 +1,18 @@
+[Unit]
+Description=Alerta monitoring system service
+Documentation=https://github.com/alerta/alerta
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/alertad run -h {{ ansible_default_ipv4.address }} -p {{ alerta_port_arg.api }} --with-threads --reload --lazy-loader
+User={{ alerta_arg.user }}
+Type=idle
+StandardInput=tty-force
+StandardError=syslog
+LimitNOFILE=8192
+LimitNPROC=8192
+Restart=always
+RestartSec=20
+
+[Install]
+WantedBy=multi-user.target
