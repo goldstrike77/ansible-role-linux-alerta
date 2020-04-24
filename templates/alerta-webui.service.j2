@@ -4,7 +4,7 @@ Documentation=https://github.com/alerta/alerta-webui
 After=network.target
 
 [Service]
-WorkingDirectory=/{{ alerta_dist_path }}/alerta
+WorkingDirectory={{ alerta_dist_path }}/alerta
 ExecStart=/bin/python3 -m http.server {{ alerta_port_arg.webui }}
 User={{ alerta_arg.user }}
 Type=idle

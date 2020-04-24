@@ -72,10 +72,6 @@
   loop: '{{ alerta_conf_scripts }}'
   register: alerta_conf_update
 
-- name: Enable Alerta authentication.
-  include: 'authentication.yml'
-  when: alerta_servers[0] in ansible_default_ipv4.address
-
 - name: Reload the other Alerta service.
   shell: echo ''
   notify: 'Ensure Alerta service is enabled'
@@ -89,3 +85,7 @@
   when:
     - exporter_is_install | bool
     - consul_public_register | bool
+
+- name: Enable Alerta authentication.
+  include: 'authentication.yml'
+  when: alerta_servers[0] in ansible_default_ipv4.address
