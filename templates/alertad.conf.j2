@@ -10,6 +10,7 @@ SECRET_KEY = '{{ lookup('password', '' + alerta_cluster + ':authentication:token
 AUTH_PROVIDER = '{{ alerta_arg.auth_provider }}'
 ADMIN_USERS = ['{{ alerta_admin_user }}']
 SIGNUP_ENABLED = {{ alerta_arg.signup_enabled }}
+SITE_LOGO_URL = '{{ alerta_arg.site_logo_url | default("") }}'
 LOG_HANDLERS = ['console', 'file']
 LOG_FILE = '/var/log/alerta/alertad.log'
 LOG_MAX_BYTES = {{ alerta_arg.log_max_mib }}*1024*1024
