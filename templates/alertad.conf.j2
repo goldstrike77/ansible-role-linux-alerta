@@ -1,8 +1,11 @@
 DATABASE_URL = 'mongodb://{% if alerta_mongod_auth | bool %}{{ alerta_mongod_user }}:{{ alerta_mongod_pass | urlencode }}@{% endif %}{{ alerta_mongod_hosts | list | join(",") }}:{{ alerta_mongod_port }}/ALERTA?{% if ( alerta_mongod_replset is defined ) and ( alerta_servers|length is not divisibleby 2 ) and ( alerta_servers|length > 2 ) %}replicaSet={{ alerta_mongod_replset | default("ALERTA") | upper }}&{% endif %}connectTimeoutMS=300000'
 DATABASE_NAME = 'ALERTA'
 DATABASE_RAISE_ON_ERROR = False
+COLUMNS = ['severity', 'status', 'type', 'lastReceiveTime', 'duplicateCount', 'environment', 'group', 'resource', 'service', 'event', 'text']
 CORS_ORIGINS = [ 'https?://\w*\:?\d*/?.*' ]
 AUTH_REQUIRED = True
+BASE_URL = '{{ alerta_arg.base_url }}'
+USE_PROXYFIX = {{ alerta_arg.use_proxyfix }}
 SECRET_KEY = '{{ lookup('password', '' + alerta_cluster + ':authentication:tokens length=32 chars=ascii_letters,digits') }}'
 AUTH_PROVIDER = '{{ alerta_arg.auth_provider }}'
 ADMIN_USERS = ['{{ alerta_admin_user }}']

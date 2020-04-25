@@ -73,6 +73,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 ##### System Variables
 * `alerta_arg.user`: System user name for running Alerta services.
 * `alerta_arg.auth_provider`: Defines authentication providers.
+* `alerta_arg.base_url`: API served on a path or behind a proxy use it to fix relative links.
+* `alerta_arg.use_proxyfix`: API served behind SSL terminating proxy.
 * `alerta_arg.signup_enabled`: Whether prevent sign-up of new users via the web UI.
 * `alerta_arg.log_max_mib`: Maximum mebibyte size of log file before rollover.
 * `alerta_arg.log_backup_count`: Number of rollover files before older files are deleted.
@@ -147,6 +149,8 @@ You can also use the group_vars or the host_vars files for setting the variables
     alerta_arg:
       user: 'alerta'
       auth_provider: 'basic'
+      base_url: '/api'
+      use_proxyfix: 'False'
       signup_enabled: 'False'
       log_max_mib: '25'
       log_backup_count: '10'
