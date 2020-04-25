@@ -48,7 +48,7 @@ alerta_arg:
   log_format: 'verbose' # Defines log file formatter.
 
 # Plugins Variables #
-alerta_plugins: # Define the addition extend plugin.
+alerta_plugins: # Define additional plugins to install.
   prometheus:
     - alertmanager_api_url: 'http://MONITOR-Production-alertmanager.service.dc01.local:9093'
       alertmanager_silence_days: '2'
