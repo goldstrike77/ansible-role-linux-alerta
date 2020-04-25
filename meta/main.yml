@@ -52,7 +52,7 @@ dependencies:
   # if you add dependencies to this list.
   - role: 'ansible-role-linux-mongodb'
     vars:
-      mongod_authorization: false
+      mongod_authorization: '{{ alerta_mongod_auth }}'
       mongod_servers: '{{ alerta_servers }}'
       mongod_version: '{{ alerta_mongod_version }}'
       mongod_system_type: 'small'
@@ -60,4 +60,11 @@ dependencies:
       mongod_path: '{{ alerta_mongod_path }}'
       mongod_port: '{{ alerta_mongod_port }}'
       mongod_replset: "{% if ( alerta_servers|length is not divisibleby 2 ) and ( alerta_servers|length > 2 ) %}{{ alerta_mongod_replset | default('alerta') }}{% else %}Non-ReplicaSet{% endif %}"
+      mongod_sa_user: '{{ alerta_mongod_sa_user }}'
+      mongod_sa_pass: '{{ alerta_mongod_sa_pass }}'
       mongod_backupset_arg: '{{ alerta_mongod_backupset_arg }}'
+      mongod_bu_dbs_arg:
+        - user: '{{ alerta_mongod_user }}'
+          pass: '{{ alerta_mongod_pass }}'
+          dbs: 'alerta'
+          role: 'readWrite'

@@ -15,7 +15,7 @@
   pip:
     name: '{{ alerta_python_dependent_packages }}'
     state: 'present'
-    executable: '/usr/bin/pip3'
+    executable: '/usr/bin/pip3.6'
     extra_args: '-i {{ alerta_pypi_url }}'
   register: alerta_python_dependent_packages_update
   until: alerta_python_dependent_packages_update is succeeded

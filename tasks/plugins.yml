@@ -7,7 +7,7 @@
   pip:
     name: 'git+https://github.com/alerta/alerta-contrib.git#subdirectory=plugins/{{ item }}'
     state: 'present'
-    executable: '/usr/bin/pip3'
+    executable: '/usr/bin/pip3.6'
   environment:
     no_proxy: '*'
   loop: "{{ alerta_plugin_list }}"
