@@ -76,6 +76,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `alerta_arg.base_url`: API served on a path or behind a proxy use it to fix relative links.
 * `alerta_arg.use_proxyfix`: API served behind SSL terminating proxy.
 * `alerta_arg.signup_enabled`: Whether prevent sign-up of new users via the web UI.
+* `site_logo_url`: URL of company logo to replace "alerta" in navigation bar.
 * `alerta_arg.log_max_mib`: Maximum mebibyte size of log file before rollover.
 * `alerta_arg.log_backup_count`: Number of rollover files before older files are deleted.
 * `alerta_arg.log_format`: Defines log file formatter.
@@ -149,9 +150,10 @@ You can also use the group_vars or the host_vars files for setting the variables
     alerta_arg:
       user: 'alerta'
       auth_provider: 'basic'
-      base_url: '/api'
+      base_url: ''
       use_proxyfix: 'False'
       signup_enabled: 'False'
+      site_logo_url: ''
       log_max_mib: '25'
       log_backup_count: '10'
       log_format: 'verbose'
