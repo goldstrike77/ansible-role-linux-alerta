@@ -26,11 +26,11 @@ __Table of Contents__
 - [Contributors](#Contributors)
 
 ## Overview
-This Ansible role installs Alerta on linux operating system, including establishing a filesystem structure and server configuration with some common operational features.
+The alerta monitoring system is a tool used to consolidate and de-duplicate alerts from multiple sources for quick ‘at-a-glance’ visualisation. With just one system you can monitor alerts from many other monitoring tools on a single screen.
 
 ## Requirements
 ### Operating systems
-This role will work on the following operating systems:
+This Ansible role installs Alerta on linux operating system, including establishing a filesystem structure and server configuration with some common operational features. This role will work on the following operating systems:
 
   * CentOS 7
 
