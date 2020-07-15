@@ -15,6 +15,14 @@ alerta_conf_scripts:
   - { src: 'alerta-webui.service.j2', dest: '/lib/systemd/system/alerta-webui.service' }
   - { src: 'config.json.j2', dest: '{{ alerta_dist_path }}/alerta/config.json' }
 
+alerta_allowed_environments:
+  - 'PRODUCTION'
+  - 'DEVELOPMENT'
+  - 'TESTING'
+  - 'UAT'
+  - 'SIT'
+  - 'DRS'
+
 alerta_servers: "\
   {% set _alerta_servers = [] %}\
   {% for host in groups[group_names[-1]] %}\

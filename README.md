@@ -86,9 +86,11 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### Service Mesh
 * `environments`: Define the service environment.
+* `datacenter`: Define the DataCenter.
+* `domain`: Define the Domain.
 * `tags`: Define the service custom label.
 * `exporter_is_install`: Whether to install prometheus exporter.
-* `consul_public_register`: false Whether register a exporter service with public consul client.
+* `consul_public_register`: Whether register a exporter service with public consul client.
 * `consul_public_exporter_token`: Public Consul client ACL token.
 * `consul_public_http_prot`: The consul Hypertext Transfer Protocol.
 * `consul_public_clients`: List of public consul clients.
@@ -98,9 +100,9 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 There are some variables in vars/main.yml:
 
 ## Dependencies
-- Ansible versions >= 2.8 are supported.
-- Python >= 2.7.5 
-- [MongoDB](https://github.com/goldstrike77/ansible-role-linux-mongodb.git) 
+- Ansible versions >= 2.8
+- Python >= 2.7.5
+- [MongoDB](https://github.com/goldstrike77/ansible-role-linux-mongodb.git)
 
 ## Example
 
@@ -110,71 +112,77 @@ See tests/inventory for an example.
 ### Vars in role configuration
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: all
-      roles:
-         - role: ansible-role-linux-alerta
+```yaml
+- hosts: all
+  roles:
+     - role: ansible-role-linux-alerta
+```
 
 ### Combination of group vars and playbook
-You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`
+You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
-    alerta_admin_user: 'admin'
-    alerta_admin_pass: 'changeme'
-    alerta_dist_path: '/data'
-    alerta_cluster: 'alerta'
-    alerta_mongod_dept: true
-    alerta_port_arg:
-      api: '19199'
-      webui: '19198'
-    alerta_mongod_auth: true
-    alerta_mongod_hosts: 'localhost'
-    alerta_mongod_node_role: 'replica'
-    alerta_mongod_path: '{{ alerta_dist_path }}'
-    alerta_mongod_port: '27017'
-    alerta_mongod_replset: '{{ alerta_cluster }}'
-    alerta_mongod_sa_pass: 'changeme'
-    alerta_mongod_sa_user: 'sa'
-    alerta_mongod_user: 'alerta'
-    alerta_mongod_pass: 'changeme'
-    alerta_mongod_version: '36'
-    alerta_mongod_backupset_arg:
-      keep: '7'
-      encryptkey: 'wEX6nE3eHAJp'
-      cloud_rsync: true
-      cloud_drive: 'azureblob'
-      cloud_bwlimit: '10M'
-      cloud_event: 'sync'
-      cloud_config:
-        account: 'blobuser'
-        key: 'base64encodedkey=='
-        endpoint: 'blob.core.chinacloudapi.cn'
-    alerta_arg:
-      user: 'alerta'
-      auth_provider: 'basic'
-      base_url: ''
-      use_proxyfix: 'False'
-      signup_enabled: 'False'
-      site_logo_url: ''
-      log_max_mib: '25'
-      log_backup_count: '10'
-      log_format: 'verbose'
-    alerta_plugins:
-      prometheus:
-        - alertmanager_api_url: 'http://MONITOR-Production-alertmanager.service.dc01.local:9093'
-          alertmanager_silence_days: '2'
-    environments: 'Development'
-    tags:
-      subscription: 'default'
-      owner: 'nobody'
-      department: 'Infrastructure'
-      organization: 'The Company'
-      region: 'IDC01'
-    exporter_is_install: false
-    consul_public_register: false
-    consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
-    consul_public_http_prot: 'https'
-    consul_public_http_port: '8500'
-    consul_public_clients:
-      - '127.0.0.1'
+```yaml
+alerta_admin_user: 'admin'
+alerta_admin_pass: 'changeme'
+alerta_dist_path: '/data'
+alerta_cluster: 'alerta'
+alerta_mongod_dept: true
+alerta_port_arg:
+  api: '19199'
+  webui: '19198'
+alerta_mongod_auth: true
+alerta_mongod_hosts: 'localhost'
+alerta_mongod_node_role: 'replica'
+alerta_mongod_path: '{{ alerta_dist_path }}'
+alerta_mongod_port: '27017'
+alerta_mongod_replset: '{{ alerta_cluster }}'
+alerta_mongod_sa_pass: 'changeme'
+alerta_mongod_sa_user: 'sa'
+alerta_mongod_user: 'alerta'
+alerta_mongod_pass: 'changeme'
+alerta_mongod_version: '36'
+alerta_mongod_backupset_arg:
+  keep: '7'
+  encryptkey: 'wEX6nE3eHAJp'
+  cloud_rsync: true
+  cloud_drive: 'azureblob'
+  cloud_bwlimit: '10M'
+  cloud_event: 'sync'
+  cloud_config:
+    account: 'blobuser'
+    key: 'base64encodedkey=='
+    endpoint: 'blob.core.chinacloudapi.cn'
+alerta_arg:
+  user: 'alerta'
+  auth_provider: 'basic'
+  base_url: ''
+  use_proxyfix: 'False'
+  signup_enabled: 'False'
+  site_logo_url: ''
+  log_max_mib: '25'
+  log_backup_count: '10'
+  log_format: 'verbose'
+alerta_plugins:
+  prometheus:
+    - alertmanager_api_url: 'http://MONITOR-Production-alertmanager.service.dc01.local:9093'
+      alertmanager_silence_days: '2'
+environments: 'Development'
+datacenter: 'dc01'
+domain: 'local'
+tags:
+  subscription: 'default'
+  owner: 'nobody'
+  department: 'Infrastructure'
+  organization: 'The Company'
+  region: 'China'
+exporter_is_install: false
+consul_public_register: false
+consul_public_exporter_token: '00000000-0000-0000-0000-000000000000'
+consul_public_http_prot: 'https'
+consul_public_http_port: '8500'
+consul_public_clients:
+  - '127.0.0.1'
+```
 
 ## License
 ![](https://img.shields.io/badge/MIT-purple.svg?style=for-the-badge)

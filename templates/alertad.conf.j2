@@ -16,6 +16,7 @@ LOG_FILE = '/var/log/alerta/alertad.log'
 LOG_MAX_BYTES = {{ alerta_arg.log_max_mib }}*1024*1024
 LOG_BACKUP_COUNT = {{ alerta_arg.log_backup_count }}
 LOG_FORMAT = '{{ alerta_arg.log_format }}'
+ALLOWED_ENVIRONMENTS = ['{{ alerta_allowed_environments | list | join("','") }}']
 {% if alerta_plugin_list is defined %}
 PLUGINS = ['{{ alerta_plugin_list | list | join("','") }}']
 PLUGINS_RAISE_ON_ERROR = False
