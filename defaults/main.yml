@@ -53,7 +53,7 @@ alerta_arg:
 # Plugins Variables #
 alerta_plugins: # Define additional plugins to install.
   prometheus:
-    - alertmanager_api_url: 'http://MONITOR-Production-alertmanager.service.dc01.local:9093'
+    - alertmanager_api_url: 'monitor-production-alertmanager.service.dc01.local:9093'
       alertmanager_silence_days: '2'
 
 # Service Mesh #

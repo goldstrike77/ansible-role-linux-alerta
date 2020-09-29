@@ -11,12 +11,43 @@ AUTH_PROVIDER = '{{ alerta_arg.auth_provider }}'
 ADMIN_USERS = ['{{ alerta_admin_user }}']
 SIGNUP_ENABLED = {{ alerta_arg.signup_enabled }}
 SITE_LOGO_URL = '{{ alerta_arg.site_logo_url | default("") }}'
+SEVERITY_MAP = {
+  'P0': 1,
+  'disaster': 1,
+  'P1': 2,
+  'critical': 2,
+  'P2': 3,
+  'warning': 3,
+  'P3': 4,
+  'medium': 4,
+  'P4': 5,
+  'low': 5,
+  'ok': 6
+}
+DEFAULT_NORMAL_SEVERITY = 'ok'
+COLOR_MAP = {
+  'severity': {
+    'P0': 'black',
+    'disaster': 'black',
+    'P1': 'red',
+    'critical': 'red',
+    'P2': 'yellow',
+    'warning': 'yellow',
+    'P3': 'gray',
+    'medium': 'gray',
+    'P4': 'white',
+    'low': 'white',
+    'ok': '#00CC00'
+  },
+  'text': 'black',
+  'highlight': 'skyblue'
+}
 LOG_HANDLERS = ['console', 'file']
 LOG_FILE = '/var/log/alerta/alertad.log'
 LOG_MAX_BYTES = {{ alerta_arg.log_max_mib }}*1024*1024
 LOG_BACKUP_COUNT = {{ alerta_arg.log_backup_count }}
 LOG_FORMAT = '{{ alerta_arg.log_format }}'
-ALLOWED_ENVIRONMENTS = ['{{ alerta_allowed_environments | list | join("','") }}']
+ALLOWED_ENVIRONMENTS = ['{{ alerta_allowed_environments | list | join("','") | upper }}']
 {% if alerta_plugin_list is defined %}
 PLUGINS = ['{{ alerta_plugin_list | list | join("','") }}']
 PLUGINS_RAISE_ON_ERROR = False

@@ -68,3 +68,4 @@ dependencies:
           pass: '{{ alerta_mongod_pass }}'
           dbs: 'alerta'
           role: 'readWrite'
+    when: alerta_mongod_dept | bool

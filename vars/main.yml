@@ -16,21 +16,23 @@ alerta_conf_scripts:
   - { src: 'config.json.j2', dest: '{{ alerta_dist_path }}/alerta/config.json' }
 
 alerta_allowed_environments:
-  - 'PRODUCTION'
+  - 'DEV'
   - 'DEVELOPMENT'
+  - 'DISASTER'
+  - 'DRS'
+  - 'PRD'
+  - 'PRODUCTION'
+  - 'QA'
+  - 'SIT'
   - 'TESTING'
   - 'UAT'
-  - 'SIT'
-  - 'DRS'
 
 alerta_servers: "\
   {% set _alerta_servers = [] %}\
   {% for host in groups[group_names[-1]] %}\
-    {% if hostvars[host]['alerta_cluster'] is defined %}\
-      {% set _alerta_cluster = hostvars[host]['alerta_cluster'] | default('') %}\
-      {% if ( _alerta_cluster == hostvars[host]['alerta_cluster']) %}\
-        {% if _alerta_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
-      {% endif %}\
+    {% set _alerta_cluster = alerta_cluster | default('') %}\
+    {% if ( _alerta_cluster == alerta_cluster ) %}\
+      {% if _alerta_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
     {% endif %}\
   {% endfor %}\
   {{ _alerta_servers }}"
