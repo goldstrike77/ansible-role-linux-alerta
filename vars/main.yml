@@ -27,6 +27,18 @@ alerta_allowed_environments:
   - 'TESTING'
   - 'UAT'
 
+alerta_incident_severity:
+  critical: 'critical'
+  high: 'high'
+  warning: 'warning'
+  info: 'info'
+
+alerta_incident_priority:
+  critical: 'p1'
+  high: 'p2'
+  warning: 'p3'
+  info: 'p4'
+
 alerta_servers: "\
   {% set _alerta_servers = [] %}\
   {% for host in groups[group_names[-1]] %}\

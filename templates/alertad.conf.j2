@@ -1,7 +1,7 @@
 DATABASE_URL = 'mongodb://{% if alerta_mongod_auth | bool %}{{ alerta_mongod_user }}:{{ alerta_mongod_pass | urlencode }}@{% endif %}{{ alerta_mongod_hosts | list | join(":" + alerta_mongod_port + ",") }}:{{ alerta_mongod_port }}/ALERTA?{% if ( alerta_mongod_replset is defined ) and ( alerta_servers|length is not divisibleby 2 ) and ( alerta_servers|length > 2 ) %}replicaSet={{ alerta_mongod_replset | default("ALERTA") | upper }}&{% endif %}connectTimeoutMS=300000'
 DATABASE_NAME = 'ALERTA'
 DATABASE_RAISE_ON_ERROR = False
-COLUMNS = ['severity', 'status', 'type', 'lastReceiveTime', 'duplicateCount', 'environment', 'group', 'resource', 'service', 'event', 'text']
+COLUMNS = ['severity', 'status', 'type', 'lastReceiveTime', 'duplicateCount', 'environment', 'group', 'resource', 'service', 'text']
 CORS_ORIGINS = [ 'https?://\w*\:?\d*/?.*' ]
 AUTH_REQUIRED = True
 BASE_URL = '{{ alerta_arg.base_url }}'
@@ -12,36 +12,26 @@ ADMIN_USERS = ['{{ alerta_admin_user }}']
 SIGNUP_ENABLED = {{ alerta_arg.signup_enabled }}
 SITE_LOGO_URL = '{{ alerta_arg.site_logo_url | default("") }}'
 SEVERITY_MAP = {
-  'P0': 1,
-  'disaster': 1,
-  'P1': 2,
-  'critical': 2,
-  'P2': 3,
-  'warning': 3,
-  'P3': 4,
-  'medium': 4,
-  'P4': 5,
-  'low': 5,
-  'ok': 6
+  '{{ vars['alerta_incident_' + alerta_incident_levels_map].critical }}': 1,
+  '{{ vars['alerta_incident_' + alerta_incident_levels_map].high }}': 2,
+  '{{ vars['alerta_incident_' + alerta_incident_levels_map].warning }}': 3,
+  '{{ vars['alerta_incident_' + alerta_incident_levels_map].info }}': 4,
+  'ok': 5
 }
 DEFAULT_NORMAL_SEVERITY = 'ok'
+DEFAULT_PREVIOUS_SEVERITY = '{{ vars['alerta_incident_' + alerta_incident_levels_map].info }}'
 COLOR_MAP = {
   'severity': {
-    'P0': 'black',
-    'disaster': 'black',
-    'P1': 'red',
-    'critical': 'red',
-    'P2': 'yellow',
-    'warning': 'yellow',
-    'P3': 'gray',
-    'medium': 'gray',
-    'P4': 'white',
-    'low': 'white',
+    '{{ vars['alerta_incident_' + alerta_incident_levels_map].critical }}': 'red',
+    '{{ vars['alerta_incident_' + alerta_incident_levels_map].high }}': 'yellow',
+    '{{ vars['alerta_incident_' + alerta_incident_levels_map].warning }}': 'gray',
+    '{{ vars['alerta_incident_' + alerta_incident_levels_map].info }}': 'white',
     'ok': '#00CC00'
   },
   'text': 'black',
   'highlight': 'skyblue'
 }
+DEBUG = False
 LOG_HANDLERS = ['console', 'file']
 LOG_FILE = '/var/log/alerta/alertad.log'
 LOG_MAX_BYTES = {{ alerta_arg.log_max_mib }}*1024*1024

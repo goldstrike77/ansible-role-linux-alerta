@@ -5,9 +5,10 @@ alerta_admin_user: 'admin' # Alerta Superuser name.
 alerta_admin_pass: 'changeme' # Alerta Superuser password.
 alerta_dist_path: '/data' # Specify the Alerta web ui folder.
 alerta_cluster: 'alerta' # Cluster name of servers that implements distribution performance.
+alerta_incident_levels_map: 'severity' # Defines the display mode of incident alarm, severity or priority.
 
 # Role dependencies #
-alerta_mongod_dept: false # A boolean value, whether MongoDB database use the same environment.
+alerta_mongod_dept: true # A boolean value, whether MongoDB database use the same environment.
 
 # Listen port #
 alerta_port_arg:
@@ -15,7 +16,7 @@ alerta_port_arg:
   webui: '19198' # The port number of Web UI.
 
 # MongoDB parameters #
-alerta_mongod_auth: false # A boolean value, Enable or Disable MongoDB authentication.
+alerta_mongod_auth: true # A boolean value, Enable or Disable MongoDB authentication.
 alerta_mongod_hosts: 'localhost' # Group of MongoDB hosts Graylog should connect to.
 alerta_mongod_node_role: 'replica' # Member role for ReplicaSet.
 alerta_mongod_path: '{{ alerta_dist_path }}' # Specify the MongoDB data directory.
@@ -53,7 +54,7 @@ alerta_arg:
 # Plugins Variables #
 alerta_plugins: # Define additional plugins to install.
   prometheus:
-    - alertmanager_api_url: 'monitor-production-alertmanager.service.dc01.local:9093'
+    - alertmanager_api_url: 'demo-monitor-production-alertmanager.service.dc01.local:9093'
       alertmanager_silence_days: '2'
 
 # Service Mesh #

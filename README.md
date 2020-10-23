@@ -48,6 +48,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `alerta_admin_pass`: Alerta Superuser password.
 * `alerta_dist_path`: Specify the Alerta web ui folder.
 * `alerta_cluster`: Cluster name of servers that implements distribution performance.
+* `alerta_incident_levels_map`: Defines the display mode of incident alarm, severity or priority.
 
 ##### Role dependencies
 * `alerta_mongod_dept`: A boolean value, whether MongoDB database use the same environment.
@@ -126,6 +127,7 @@ alerta_admin_user: 'admin'
 alerta_admin_pass: 'changeme'
 alerta_dist_path: '/data'
 alerta_cluster: 'alerta'
+alerta_incident_levels_map: 'severity'
 alerta_mongod_dept: true
 alerta_port_arg:
   api: '19199'
@@ -164,7 +166,7 @@ alerta_arg:
   log_format: 'verbose'
 alerta_plugins:
   prometheus:
-    - alertmanager_api_url: 'http://MONITOR-Production-alertmanager.service.dc01.local:9093'
+    - alertmanager_api_url: 'http://demo-monitor-Production-alertmanager.service.dc01.local:9093'
       alertmanager_silence_days: '2'
 environments: 'Development'
 datacenter: 'dc01'
