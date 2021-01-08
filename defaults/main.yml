@@ -1,6 +1,7 @@
 ---
 # General parameters #
 alerta_is_install: false # A boolean value, whether install the Alerta.
+alerta_version: '8.3.3' # Specify the Alerta version.
 alerta_admin_user: 'admin' # Alerta Superuser name.
 alerta_admin_pass: 'changeme' # Alerta Superuser password.
 alerta_dist_path: '/data' # Specify the Alerta web ui folder.
@@ -54,13 +55,14 @@ alerta_arg:
 # Plugins Variables #
 alerta_plugins: # Define additional plugins to install.
   prometheus:
-    - alertmanager_api_url: 'demo-monitor-production-alertmanager.service.dc01.local:9093'
+    - alertmanager_api_url: 'demo-prd-infra-monitor-alertmanager.service.dc01.local:9093'
       alertmanager_silence_days: '2'
 
 # Service Mesh #
-environments: 'Development' # Define the service environment.
+environments: 'prd' # Define the service environment.
 datacenter: 'dc01' # Define the DataCenter.
 domain: 'local' # Define the Domain.
+customer: 'demo' # Define the customer name.
 #tags: # Define the service custom label.
 #  subscription: 'default'
 #  owner: 'nobody'

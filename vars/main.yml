@@ -2,8 +2,9 @@
 alerta_pypi_url: 'https://mirrors.aliyun.com/pypi/simple/'
 
 alerta_python_dependent_packages:
+  - 'PyJWT==1.7.1'
   - 'alerta'
-  - 'alerta-server'
+  - 'alerta-server=={{ alerta_version }}'
 
 alerta_folder:
   - '{{ alerta_dist_path }}/alerta'
@@ -41,7 +42,7 @@ alerta_incident_priority:
 
 alerta_servers: "\
   {% set _alerta_servers = [] %}\
-  {% for host in groups[group_names[-1]] %}\
+  {% for host in groups[group_names[0]] %}\
     {% set _alerta_cluster = alerta_cluster | default('') %}\
     {% if ( _alerta_cluster == alerta_cluster ) %}\
       {% if _alerta_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
