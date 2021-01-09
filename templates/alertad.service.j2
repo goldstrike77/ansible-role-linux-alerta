@@ -4,15 +4,13 @@ Documentation=https://github.com/alerta/alerta
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /usr/local/bin/alertad run -h {{ ansible_default_ipv4.address }} -p {{ alerta_port_arg.api }} --with-threads --reload --lazy-loader
-User={{ alerta_arg.user }}
-Type=idle
-StandardInput=tty-force
+ExecStart=/usr/local/bin/uwsgi --ini /etc/uwsgi.ini
+RuntimeDirectory=uwsgi
+Type=notify
 StandardError=syslog
-LimitNOFILE=8192
-LimitNPROC=8192
+NotifyAccess=all
 Restart=always
-RestartSec=20
+RestartSec=30
 
 [Install]
 WantedBy=multi-user.target

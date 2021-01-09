@@ -5,16 +5,16 @@ alerta_python_dependent_packages:
   - 'PyJWT==1.7.1'
   - 'alerta'
   - 'alerta-server=={{ alerta_version }}'
+  - 'uwsgi'
 
 alerta_folder:
-  - '{{ alerta_dist_path }}/alerta'
   - '/var/log/alerta'
 
 alerta_conf_scripts:
   - { src: 'alertad.conf.j2', dest: '/etc/alertad.conf' }
   - { src: 'alertad.service.j2', dest: '/lib/systemd/system/alertad.service' }
-  - { src: 'alerta-webui.service.j2', dest: '/lib/systemd/system/alerta-webui.service' }
-  - { src: 'config.json.j2', dest: '{{ alerta_dist_path }}/alerta/config.json' }
+  - { src: 'uwsgi.ini.j2', dest: '/etc/uwsgi.ini.j2' }
+  - { src: 'config.json.j2', dest: '/data/nginx/site/alerta/config.json' }
 
 alerta_allowed_environments:
   - 'DEV'
@@ -43,9 +43,6 @@ alerta_incident_priority:
 alerta_servers: "\
   {% set _alerta_servers = [] %}\
   {% for host in groups[group_names[0]] %}\
-    {% set _alerta_cluster = alerta_cluster | default('') %}\
-    {% if ( _alerta_cluster == alerta_cluster ) %}\
-      {% if _alerta_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
-    {% endif %}\
+    {% if _alerta_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
   {% endfor %}\
   {{ _alerta_servers }}"

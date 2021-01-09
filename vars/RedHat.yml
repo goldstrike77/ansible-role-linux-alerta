@@ -3,6 +3,8 @@ alerta_epel_repo_name: 'epel'
 alerta_epel_repo_url: 'http://mirrors.tuna.tsinghua.edu.cn/epel/$releasever/$basearch/'
 
 alerta_dependent_package:
-  - 'python36'
-  - 'python3-pip'
+  - 'gcc'
   - 'git'
+  - 'python36'
+  - 'python3-devel'
+  - 'python3-pip'

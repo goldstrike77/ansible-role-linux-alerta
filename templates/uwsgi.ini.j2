@@ -1,0 +1,15 @@
+[uwsgi]
+chdir = /data/nginx/site/alerta
+mount = /api=wsgi.py
+callable = app
+manage-script-name = true
+env = BASE_URL=/api
+master = true
+processes = 5
+logger = syslog:alertad
+http-socket = {{ ansible_default_ipv4.address }}:{{ alerta_port_arg.api }}
+uid = nobody
+gid = nobody
+vacuum = true
+die-on-term = true
+enable-threads = true

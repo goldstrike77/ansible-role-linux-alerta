@@ -47,19 +47,18 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `alerta_version`: Specify the Alerta version.
 * `alerta_admin_user`: Alerta Superuser name.
 * `alerta_admin_pass`: Alerta Superuser password.
-* `alerta_dist_path`: Specify the Alerta web ui folder.
-* `alerta_cluster`: Cluster name of servers that implements distribution performance.
 * `alerta_incident_levels_map`: Defines the display mode of incident alarm, severity or priority.
 
 ##### Role dependencies
-* `alerta_mongod_dept`: A boolean value, whether MongoDB database use the same environment.
+* `alerta_mongod_dept`: A boolean to determine whether or not to install the MongoDB together.
+* `alerta_ngx_dept`: A boolean to determine whether or not to proxy web interface and API traffic using NGinx.
 
 ##### Listen port
 * `alerta_port_arg.api`: The port number of API.
 * `alerta_port_arg.webui`: The port number of Web UI.
 
 ##### MongoDB parameters
-* `alerta_mongod_auth`: A boolean value, Enable or Disable MongoDB authentication.
+* `alerta_mongod_auth`: A boolean to determine whether or not to enable MongoDB authentication.
 * `alerta_mongod_hosts`: Group of MongoDB hosts Graylog should connect to.
 * `alerta_mongod_node_role`: Member role for ReplicaSet.
 * `alerta_mongod_path`: Specify the MongoDB data directory.
@@ -73,15 +72,15 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `alerta_mongod_backupset_arg`: Defines backup parameters.
 
 ##### System Variables
-* `alerta_arg.user`: System user name for running Alerta services.
 * `alerta_arg.auth_provider`: Defines authentication providers.
 * `alerta_arg.base_url`: API served on a path or behind a proxy use it to fix relative links.
-* `alerta_arg.use_proxyfix`: API served behind SSL terminating proxy.
-* `alerta_arg.signup_enabled`: Whether prevent sign-up of new users via the web UI.
-* `site_logo_url`: URL of company logo to replace "alerta" in navigation bar.
-* `alerta_arg.log_max_mib`: Maximum mebibyte size of log file before rollover.
+* `alerta_arg.customer_views`: A boolean to determine whether or not to enable multi-tenacy based on customer attribute.
 * `alerta_arg.log_backup_count`: Number of rollover files before older files are deleted.
 * `alerta_arg.log_format`: Defines log file formatter.
+* `alerta_arg.log_max_mib`: Maximum mebibyte size of log file before rollover.
+* `alerta_arg.signup_enabled`: A boolean to determine whether or not to prevent sign-up of new users via the web UI.
+* `alerta_arg.site_logo_url`: URL of company logo to replace "alerta" in navigation bar.
+* `alerta_arg.use_proxyfix`: A boolean to determine whether or not terminating proxy API served behind SSL.
 
 ##### Plugins Variables
 * `alerta_plugins`: Define additional plugins to install.
@@ -92,8 +91,8 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `domain`: Define the Domain.
 * `customer`: Define the customer name.
 * `tags`: Define the service custom label.
-* `exporter_is_install`: Whether to install prometheus exporter.
-* `consul_public_register`: Whether register a exporter service with public consul client.
+* `exporter_is_install`: A boolean to determine whether or not to install Prometheus exporter.
+* `consul_public_register`: A boolean to determine whether or not to register an exporter with a public consul client.
 * `consul_public_exporter_token`: Public Consul client ACL token.
 * `consul_public_http_prot`: The consul Hypertext Transfer Protocol.
 * `consul_public_clients`: List of public consul clients.
@@ -128,19 +127,18 @@ You can also use the group_vars or the host_vars files for setting the variables
 alerta_version: '8.3.3'
 alerta_admin_user: 'admin'
 alerta_admin_pass: 'changeme'
-alerta_dist_path: '/data'
-alerta_cluster: 'alerta'
 alerta_incident_levels_map: 'severity'
 alerta_mongod_dept: true
+alerta_ngx_dept: true
 alerta_port_arg:
   api: '19199'
   webui: '19198'
 alerta_mongod_auth: true
 alerta_mongod_hosts: 'localhost'
 alerta_mongod_node_role: 'replica'
-alerta_mongod_path: '{{ alerta_dist_path }}'
+alerta_mongod_path: '/data'
 alerta_mongod_port: '27017'
-alerta_mongod_replset: '{{ alerta_cluster }}'
+alerta_mongod_replset: 'alerta'
 alerta_mongod_sa_pass: 'changeme'
 alerta_mongod_sa_user: 'sa'
 alerta_mongod_user: 'alerta'
@@ -158,7 +156,6 @@ alerta_mongod_backupset_arg:
     key: 'base64encodedkey=='
     endpoint: 'blob.core.chinacloudapi.cn'
 alerta_arg:
-  user: 'alerta'
   auth_provider: 'basic'
   base_url: ''
   use_proxyfix: 'False'

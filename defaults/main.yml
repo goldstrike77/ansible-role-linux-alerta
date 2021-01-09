@@ -1,15 +1,25 @@
 ---
 # General parameters #
-alerta_is_install: false # A boolean value, whether install the Alerta.
+alerta_is_install: false # A boolean to determine whether or not to install the Alerta.
 alerta_version: '8.3.3' # Specify the Alerta version.
 alerta_admin_user: 'admin' # Alerta Superuser name.
 alerta_admin_pass: 'changeme' # Alerta Superuser password.
-alerta_dist_path: '/data' # Specify the Alerta web ui folder.
-alerta_cluster: 'alerta' # Cluster name of servers that implements distribution performance.
 alerta_incident_levels_map: 'severity' # Defines the display mode of incident alarm, severity or priority.
+# ┌──────────┬──────────┐
+# │ priority │ severity │
+# ├──────────┼──────────┤
+# │    p1    │ critical │
+# ├──────────┼──────────┤
+# │    p2    │ high     │
+# ├──────────┼──────────┤
+# │    p3    │ warning  │
+# ├──────────┼──────────┤
+# │    p4    │ info     │
+# └──────────┴──────────┘
 
 # Role dependencies #
-alerta_mongod_dept: true # A boolean value, whether MongoDB database use the same environment.
+alerta_mongod_dept: true # A boolean to determine whether or not to install the MongoDB together.
+alerta_ngx_dept: true # A boolean to determine whether or not to proxy web interface and API traffic using NGinx.
 
 # Listen port #
 alerta_port_arg:
@@ -17,12 +27,12 @@ alerta_port_arg:
   webui: '19198' # The port number of Web UI.
 
 # MongoDB parameters #
-alerta_mongod_auth: true # A boolean value, Enable or Disable MongoDB authentication.
+alerta_mongod_auth: true # A boolean to determine whether or not to enable MongoDB authentication.
 alerta_mongod_hosts: 'localhost' # Group of MongoDB hosts Graylog should connect to.
 alerta_mongod_node_role: 'replica' # Member role for ReplicaSet.
-alerta_mongod_path: '{{ alerta_dist_path }}' # Specify the MongoDB data directory.
+alerta_mongod_path: '/data' # Specify the MongoDB data directory.
 alerta_mongod_port: '27017' # The MongoDB instance port.
-alerta_mongod_replset: '{{ alerta_cluster }}' # MongoDB ReplicaSet name.
+alerta_mongod_replset: 'alerta' # MongoDB ReplicaSet name.
 alerta_mongod_sa_pass: 'changeme' # MongoDB Superuser password.
 alerta_mongod_sa_user: 'sa' # MongoDB Superuser name.
 alerta_mongod_user: 'alerta' # MongoDB Graylog username.
@@ -42,15 +52,15 @@ alerta_mongod_backupset_arg: # Defines backup parameters.
 
 # System Variables #
 alerta_arg:
-  user: 'alerta' # System user name for running Alerta services.
   auth_provider: 'basic' # Defines authentication providers.
   base_url: '' # API served on a path or behind a proxy use it to fix relative links.
-  use_proxyfix: 'False' # API served behind SSL terminating proxy.
-  signup_enabled: 'False' # Whether prevent sign-up of new users via the web UI.
-  site_logo_url: '' # URL of company logo to replace "alerta" in navigation bar.
-  log_max_mib: '25' # Maximum mebibyte size of log file before rollover.
+  customer_views: true # A boolean to determine whether or not to enable multi-tenacy based on customer attribute.
   log_backup_count: '10' # Number of rollover files before older files are deleted.
   log_format: 'verbose' # Defines log file formatter.
+  log_max_mib: '25' # Maximum mebibyte size of log file before rollover.
+  signup_enabled: false # A boolean to determine whether or not to prevent sign-up of new users via the web UI.
+  site_logo_url: '' # URL of company logo to replace "alerta" in navigation bar.
+  use_proxyfix: false # A boolean to determine whether or not terminating proxy API served behind SSL.
 
 # Plugins Variables #
 alerta_plugins: # Define additional plugins to install.
@@ -69,8 +79,8 @@ customer: 'demo' # Define the customer name.
 #  department: 'Infrastructure'
 #  organization: 'The Company'
 #  region: 'China'
-exporter_is_install: false # Whether to install prometheus exporter.
-consul_public_register: false # Whether register a exporter service with public consul client.
+exporter_is_install: false # A boolean to determine whether or not to install Prometheus exporter.
+consul_public_register: false # A boolean to determine whether or not to register an exporter with a public consul client.
 consul_public_exporter_token: '00000000-0000-0000-0000-000000000000' # Public Consul client ACL token.
 consul_public_http_prot: 'https' # The consul Hypertext Transfer Protocol.
 consul_public_http_port: '8500' # The consul HTTP API port.

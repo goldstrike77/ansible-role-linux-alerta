@@ -1,11 +1,8 @@
 ---
 - name: Enable alerta service
   systemd:
-    name: '{{ item }}'
+    name: 'alertad.service'
     enabled: 'yes'
     state: 'restarted'
     daemon_reload: 'yes'
-  loop:
-    - 'alertad.service'
-    - 'alerta-webui.service'
   listen: Ensure Alerta service is enabled

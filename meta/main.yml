@@ -69,3 +69,45 @@ dependencies:
           dbs: 'alerta'
           role: 'readWrite'
     when: alerta_mongod_dept | bool
+  - role: 'ansible-role-linux-nginx'
+    vars:
+      ngx_port_http: '80'
+      ngx_port_https: '{{ alerta_port_arg.webui }}'
+      ngx_compress: true
+      ngx_block_agents: true
+      ngx_block_string: true
+      ngx_ssl_protocols: 'modern'
+      ngx_allow_methods:
+        - 'POST'
+        - 'PUT'
+        - 'GET'
+        - 'HEAD'
+        - 'DELETE'
+      ngx_site:
+        - domain: 'alerta'
+          syntax:
+            - 'location /api { try_files $uri @api; }'
+            - 'location @api {'
+            - '  expires off;'
+            - '  proxy_buffering off;'
+            - '  proxy_connect_timeout 150;'
+            - '  proxy_send_timeout 100;'
+            - '  proxy_read_timeout 100;'
+            - '  client_body_buffer_size 128k;'
+            - '  proxy_buffers 4 32k;'
+            - '  client_max_body_size 8m;'
+            - '  proxy_pass_request_headers on;'
+            - '  proxy_set_header Host $http_host;'
+            - '  proxy_set_header X-Real-IP $remote_addr;'
+            - '  proxy_set_header X-Forwarded-Host $host;'
+            - '  proxy_set_header X-Forwarded-Server $host;'
+            - '  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;'
+            - '  proxy_pass http://backend_{% if alerta_ngx_domain is defined %}{{ alerta_ngx_domain }}{% else %}{{ ansible_default_ipv4.address }}{% endif %};'
+            - '}'
+          backend_address: '{{ alerta_servers }}'
+          backend_port: '{{ alerta_port_arg.api }}'
+          sticky: 'ip_hash'
+          keepalive: '{{ ansible_processor_vcpus * 4 }}'
+    when: alerta_ngx_dept | bool
+    changed_when: false
+    failed_when: false
