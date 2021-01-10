@@ -102,7 +102,7 @@ dependencies:
             - '  proxy_set_header X-Forwarded-Host $host;'
             - '  proxy_set_header X-Forwarded-Server $host;'
             - '  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;'
-            - '  proxy_pass http://backend_{% if alerta_ngx_domain is defined %}{{ alerta_ngx_domain }}{% else %}{{ ansible_default_ipv4.address }}{% endif %};'
+            - '  proxy_pass http://backend_alerta;'
             - '}'
           backend_address: '{{ alerta_servers }}'
           backend_port: '{{ alerta_port_arg.api }}'

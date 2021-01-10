@@ -11,10 +11,11 @@ alerta_folder:
   - '/var/log/alerta'
 
 alerta_conf_scripts:
-  - { src: 'alertad.conf.j2', dest: '/etc/alertad.conf' }
-  - { src: 'alertad.service.j2', dest: '/lib/systemd/system/alertad.service' }
-  - { src: 'uwsgi.ini.j2', dest: '/etc/uwsgi.ini.j2' }
-  - { src: 'config.json.j2', dest: '/data/nginx/site/alerta/config.json' }
+  - { src: 'alertad.conf', dest: '/etc/alertad.conf' }
+  - { src: 'alertad.service', dest: '/lib/systemd/system/alertad.service' }
+  - { src: 'config.json', dest: '/data/nginx/site/alerta/config.json' }
+  - { src: 'wsgi.py', dest: '/data/nginx/site/alerta/wsgi.py' }
+  - { src: 'uwsgi.ini', dest: '/etc/uwsgi.ini' }
 
 alerta_allowed_environments:
   - 'DEV'

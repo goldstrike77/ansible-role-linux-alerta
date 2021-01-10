@@ -4,13 +4,13 @@ DATABASE_RAISE_ON_ERROR = False
 COLUMNS = ['severity', 'status', 'type', 'lastReceiveTime', 'duplicateCount', 'customer', 'environment', 'group', 'resource', 'service', 'text']
 CORS_ORIGINS = [ 'https?://\w*\:?\d*/?.*' ]
 AUTH_REQUIRED = True
-CUSTOMER_VIEWS = {{ alerta_arg.customer_views | to_json }}
+CUSTOMER_VIEWS = {{ alerta_arg.customer_views | title }}
 BASE_URL = '{{ alerta_arg.base_url }}'
-USE_PROXYFIX = {{ alerta_arg.use_proxyfix | to_json }}
+USE_PROXYFIX = {{ alerta_arg.use_proxyfix | title }}
 SECRET_KEY = '{{ lookup('password', '' + group_names[0] + ':authentication:tokens length=32 chars=ascii_letters,digits') }}'
 AUTH_PROVIDER = '{{ alerta_arg.auth_provider }}'
 ADMIN_USERS = ['{{ alerta_admin_user }}','prometheus@example.com']
-SIGNUP_ENABLED = {{ alerta_arg.signup_enabled | to_json }}
+SIGNUP_ENABLED = {{ alerta_arg.signup_enabled | title }}
 SITE_LOGO_URL = '{{ alerta_arg.site_logo_url | default("") }}'
 SEVERITY_MAP = {
   '{{ vars['alerta_incident_' + alerta_incident_levels_map].critical }}': 1,
