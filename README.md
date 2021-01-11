@@ -63,6 +63,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `alerta_mongod_node_role`: Member role for ReplicaSet.
 * `alerta_mongod_path`: Specify the MongoDB data directory.
 * `alerta_mongod_port`: The MongoDB instance port.
+* `alerta_mongod_ssl`: A boolean to determine whether or not to encrypting client and cluster communications.
 * `alerta_mongod_replset`: MongoDB ReplicaSet name.
 * `alerta_mongod_sa_pass`: MongoDB Superuser password.
 * `alerta_mongod_sa_user`: MongoDB Superuser name.
@@ -138,6 +139,7 @@ alerta_mongod_hosts: 'localhost'
 alerta_mongod_node_role: 'replica'
 alerta_mongod_path: '/data'
 alerta_mongod_port: '27017'
+alerta_mongod_ssl: true
 alerta_mongod_replset: 'alerta'
 alerta_mongod_sa_pass: 'changeme'
 alerta_mongod_sa_user: 'sa'

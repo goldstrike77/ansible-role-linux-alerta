@@ -7,7 +7,7 @@ env = BASE_URL=/api
 master = true
 processes = 5
 logger = syslog:alertad
-http-socket = {{ ansible_default_ipv4.address }}:{{ alerta_port_arg.api }}
+https = {{ ansible_default_ipv4.address }}:{{ alerta_port_arg.api }},/etc/nginx/ssl/alerta.crt,/etc/nginx/ssl/alerta.key,HIGH,/etc/nginx/ssl/ca-cert.pem
 uid = nobody
 gid = nobody
 vacuum = true

@@ -8,3 +8,4 @@ alerta_dependent_package:
   - 'python36'
   - 'python3-devel'
   - 'python3-pip'
+  - 'openssl-devel'

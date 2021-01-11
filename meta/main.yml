@@ -59,6 +59,7 @@ dependencies:
       mongod_node_role: '{{ alerta_mongod_node_role }}'
       mongod_path: '{{ alerta_mongod_path }}'
       mongod_port: '{{ alerta_mongod_port }}'
+      mongod_ssl: '{{ alerta_mongod_ssl | bool }}'
       mongod_replset: "{% if ( alerta_servers|length is not divisibleby 2 ) and ( alerta_servers|length > 2 ) %}{{ alerta_mongod_replset | default('alerta') }}{% else %}Non-ReplicaSet{% endif %}"
       mongod_sa_user: '{{ alerta_mongod_sa_user }}'
       mongod_sa_pass: '{{ alerta_mongod_sa_pass }}'
@@ -102,7 +103,7 @@ dependencies:
             - '  proxy_set_header X-Forwarded-Host $host;'
             - '  proxy_set_header X-Forwarded-Server $host;'
             - '  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;'
-            - '  proxy_pass http://backend_alerta;'
+            - '  proxy_pass https://backend_alerta;'
             - '}'
           backend_address: '{{ alerta_servers }}'
           backend_port: '{{ alerta_port_arg.api }}'

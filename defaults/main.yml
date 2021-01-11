@@ -32,6 +32,7 @@ alerta_mongod_hosts: 'localhost' # Group of MongoDB hosts Graylog should connect
 alerta_mongod_node_role: 'replica' # Member role for ReplicaSet.
 alerta_mongod_path: '/data' # Specify the MongoDB data directory.
 alerta_mongod_port: '27017' # The MongoDB instance port.
+alerta_mongod_ssl: true # A boolean to determine whether or not to encrypting client and cluster communications.
 alerta_mongod_replset: 'alerta' # MongoDB ReplicaSet name.
 alerta_mongod_sa_pass: 'changeme' # MongoDB Superuser password.
 alerta_mongod_sa_user: 'sa' # MongoDB Superuser name.
