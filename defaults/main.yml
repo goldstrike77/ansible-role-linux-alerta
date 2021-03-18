@@ -28,7 +28,7 @@ alerta_port_arg:
 
 # MongoDB parameters #
 alerta_mongod_auth: true # A boolean to determine whether or not to enable MongoDB authentication.
-alerta_mongod_hosts: 'localhost' # Group of MongoDB hosts Graylog should connect to.
+alerta_mongod_hosts: 'localhost' # Group of MongoDB hosts should connect to.
 alerta_mongod_node_role: 'replica' # Member role for ReplicaSet.
 alerta_mongod_path: '/data' # Specify the MongoDB data directory.
 alerta_mongod_port: '27017' # The MongoDB instance port.
@@ -36,8 +36,9 @@ alerta_mongod_ssl: true # A boolean to determine whether or not to encrypting cl
 alerta_mongod_replset: 'alerta' # MongoDB ReplicaSet name.
 alerta_mongod_sa_pass: 'changeme' # MongoDB Superuser password.
 alerta_mongod_sa_user: 'sa' # MongoDB Superuser name.
-alerta_mongod_user: 'alerta' # MongoDB Graylog username.
-alerta_mongod_pass: 'changeme' # MongoDB Graylog password.
+alerta_mongod_user: 'alerta' # MongoDB username.
+alerta_mongod_pass: 'changeme' # MongoDB password.
+#alerta_mongod_conn_str: '&retrywrites=false&maxIdleTimeMS=120000&appName=@xxxxxxxxxx@' # MongoDB connection string.
 alerta_mongod_version: '36' # Specify the MongoDB version.
 alerta_mongod_backupset_arg: # Defines backup parameters.
   keep: '7' # Backup retention cycle in days.
@@ -55,13 +56,10 @@ alerta_mongod_backupset_arg: # Defines backup parameters.
 alerta_arg:
   auth_provider: 'basic' # Defines authentication providers.
   base_url: '' # API served on a path or behind a proxy use it to fix relative links.
-  customer_views: true # A boolean to determine whether or not to enable multi-tenacy based on customer attribute.
   log_backup_count: '10' # Number of rollover files before older files are deleted.
   log_format: 'verbose' # Defines log file formatter.
   log_max_mib: '25' # Maximum mebibyte size of log file before rollover.
-  signup_enabled: false # A boolean to determine whether or not to prevent sign-up of new users via the web UI.
   site_logo_url: '' # URL of company logo to replace "alerta" in navigation bar.
-  use_proxyfix: false # A boolean to determine whether or not terminating proxy API served behind SSL.
 
 # Plugins Variables #
 alerta_plugins: # Define additional plugins to install.

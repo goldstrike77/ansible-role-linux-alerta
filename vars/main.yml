@@ -1,7 +1,10 @@
 ---
-alerta_pypi_url: 'https://mirrors.aliyun.com/pypi/simple/'
+alerta_pypi_url: 'mirrors.aliyun.com'
 
 alerta_python_dependent_packages:
+  - 'pip'
+  - 'setuptools_rust'
+  - 'wheel'
   - 'PyJWT==1.7.1'
   - 'alerta'
   - 'alerta-server=={{ alerta_version }}'
@@ -23,6 +26,7 @@ alerta_allowed_environments:
   - 'DISASTER'
   - 'DRS'
   - 'PRD'
+  - 'NPRD'
   - 'PRODUCTION'
   - 'QA'
   - 'SIT'

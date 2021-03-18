@@ -1,16 +1,16 @@
-DATABASE_URL = 'mongodb://{% if alerta_mongod_auth | bool %}{{ alerta_mongod_user }}:{{ alerta_mongod_pass | urlencode }}@{% endif %}{{ alerta_mongod_hosts | list | join(":" + alerta_mongod_port + ",") }}:{{ alerta_mongod_port }}/ALERTA?{% if ( alerta_mongod_replset is defined ) and ( alerta_servers|length is not divisibleby 2 ) and ( alerta_servers|length > 2 ) %}replicaSet={{ alerta_mongod_replset | default("ALERTA") | upper }}&{% endif %}connectTimeoutMS=300000{% if alerta_mongod_ssl | bool %}&tls=true&tlsAllowInvalidCertificates=true{% endif %}'
+DATABASE_URL = 'mongodb://{% if alerta_mongod_auth | bool %}{{ alerta_mongod_user }}:{{ alerta_mongod_pass | urlencode }}@{% endif %}{{ alerta_mongod_hosts | list | join(":" + alerta_mongod_port + ",") }}:{{ alerta_mongod_port }}/ALERTA?{% if ( alerta_mongod_replset is defined ) and ( alerta_servers|length is not divisibleby 2 ) and ( alerta_servers|length > 2 ) %}replicaSet={{ alerta_mongod_replset | default("ALERTA") | upper }}&{% endif %}connectTimeoutMS=300000{% if alerta_mongod_ssl | bool %}&tls=true&tlsAllowInvalidCertificates=true{% endif %}{% if alerta_mongod_conn_str is defined %}alerta_mongod_conn_str{% endif %}'
 DATABASE_NAME = 'ALERTA'
 DATABASE_RAISE_ON_ERROR = False
 COLUMNS = ['severity', 'status', 'type', 'lastReceiveTime', 'duplicateCount', 'customer', 'environment', 'group', 'resource', 'service', 'text']
 CORS_ORIGINS = [ 'https?://\w*\:?\d*/?.*' ]
 AUTH_REQUIRED = True
-CUSTOMER_VIEWS = {{ alerta_arg.customer_views | title }}
+CUSTOMER_VIEWS = True
 BASE_URL = '{{ alerta_arg.base_url }}'
-USE_PROXYFIX = {{ alerta_arg.use_proxyfix | title }}
+USE_PROXYFIX = False
 SECRET_KEY = '{{ lookup('password', '' + group_names[0] + ':authentication:tokens length=32 chars=ascii_letters,digits') }}'
 AUTH_PROVIDER = '{{ alerta_arg.auth_provider }}'
 ADMIN_USERS = ['{{ alerta_admin_user }}','prometheus@example.com']
-SIGNUP_ENABLED = {{ alerta_arg.signup_enabled | title }}
+SIGNUP_ENABLED = False
 SITE_LOGO_URL = '{{ alerta_arg.site_logo_url | default("") }}'
 SEVERITY_MAP = {
   '{{ vars['alerta_incident_' + alerta_incident_levels_map].critical }}': 1,

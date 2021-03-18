@@ -59,7 +59,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 
 ##### MongoDB parameters
 * `alerta_mongod_auth`: A boolean to determine whether or not to enable MongoDB authentication.
-* `alerta_mongod_hosts`: Group of MongoDB hosts Graylog should connect to.
+* `alerta_mongod_hosts`: Group of MongoDB hosts should connect to.
 * `alerta_mongod_node_role`: Member role for ReplicaSet.
 * `alerta_mongod_path`: Specify the MongoDB data directory.
 * `alerta_mongod_port`: The MongoDB instance port.
@@ -67,21 +67,18 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `alerta_mongod_replset`: MongoDB ReplicaSet name.
 * `alerta_mongod_sa_pass`: MongoDB Superuser password.
 * `alerta_mongod_sa_user`: MongoDB Superuser name.
-* `alerta_mongod_user`: MongoDB Graylog username.
-* `alerta_mongod_pass`: MongoDB Graylog password.
+* `alerta_mongod_user`: MongoDB username.
+* `alerta_mongod_pass`: MongoDB password.
 * `alerta_mongod_version`: Specify the MongoDB version.
 * `alerta_mongod_backupset_arg`: Defines backup parameters.
 
 ##### System Variables
 * `alerta_arg.auth_provider`: Defines authentication providers.
 * `alerta_arg.base_url`: API served on a path or behind a proxy use it to fix relative links.
-* `alerta_arg.customer_views`: A boolean to determine whether or not to enable multi-tenacy based on customer attribute.
 * `alerta_arg.log_backup_count`: Number of rollover files before older files are deleted.
 * `alerta_arg.log_format`: Defines log file formatter.
 * `alerta_arg.log_max_mib`: Maximum mebibyte size of log file before rollover.
-* `alerta_arg.signup_enabled`: A boolean to determine whether or not to prevent sign-up of new users via the web UI.
 * `alerta_arg.site_logo_url`: URL of company logo to replace "alerta" in navigation bar.
-* `alerta_arg.use_proxyfix`: A boolean to determine whether or not terminating proxy API served behind SSL.
 
 ##### Plugins Variables
 * `alerta_plugins`: Define additional plugins to install.
@@ -160,8 +157,6 @@ alerta_mongod_backupset_arg:
 alerta_arg:
   auth_provider: 'basic'
   base_url: ''
-  use_proxyfix: 'False'
-  signup_enabled: 'False'
   site_logo_url: ''
   log_max_mib: '25'
   log_backup_count: '10'
