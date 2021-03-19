@@ -16,7 +16,7 @@
     name: '{{ item }}'
     state: 'present'
     executable: '/usr/bin/pip3.6'
-    extra_args: '--default-timeout=120 --ignore-installed -i https://{{ alerta_pypi_url }}/pypi/simple/ --trusted-host {{ alerta_pypi_url }}'
+    extra_args: '--default-timeout=120 -i https://{{ alerta_pypi_url }}/pypi/simple/ --trusted-host {{ alerta_pypi_url }}'
   loop: '{{ alerta_python_dependent_packages }}'
   register: alerta_python_dependent_packages_update
   until: alerta_python_dependent_packages_update is succeeded
