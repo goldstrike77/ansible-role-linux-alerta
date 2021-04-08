@@ -1,9 +1,10 @@
 ---
 # General parameters #
 alerta_is_install: false # A boolean to determine whether or not to install the Alerta.
-alerta_version: '8.3.3' # Specify the Alerta version.
+alerta_version: '8.4.1' # Specify the Alerta version.
 alerta_admin_user: 'admin' # Alerta Superuser name.
 alerta_admin_pass: 'changeme' # Alerta Superuser password.
+alerta_ngx_domain: 'alerta.example.com' # Defines domain name.
 alerta_incident_levels_map: 'severity' # Defines the display mode of incident alarm, severity or priority.
 # ┌──────────┬──────────┐
 # │ priority │ severity │
@@ -23,8 +24,8 @@ alerta_ngx_dept: true # A boolean to determine whether or not to proxy web inter
 
 # Listen port #
 alerta_port_arg:
-  api: '19199' # The port number of API.
-  webui: '19198' # The port number of Web UI.
+  api: '7443' # The port number of API.
+  webui: '8443' # The port number of Web UI.
 
 # Unable to use Azure cosmos dB for MongoDB API because Response "One or more property names for the unique index is invalid. Make sure that the property names do not contain invalid characters and that the combined paths for all unique index properties do not exceed 60 characters."
 
@@ -68,7 +69,7 @@ alerta_arg:
 alerta_plugins: # Define additional plugins to install.
   prometheus:
     - alertmanager_api_url: 'demo-prd-infra-monitor-alertmanager.service.dc01.local:9093'
-      alertmanager_silence_days: '2'
+      alertmanager_silence_days: '5'
 
 # Service Mesh #
 environments: 'prd' # Define the service environment.

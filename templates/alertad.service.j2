@@ -9,6 +9,7 @@ RuntimeDirectory=uwsgi
 Type=notify
 StandardError=syslog
 NotifyAccess=all
+LimitNOFILE=10240
 Restart=always
 RestartSec=30
 

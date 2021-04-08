@@ -1,8 +1,9 @@
 ---
-- name: Enable alerta service
+- name: Enable alerta service.
   systemd:
     name: 'alertad.service'
     enabled: 'yes'
     state: 'restarted'
     daemon_reload: 'yes'
-  listen: Ensure Alerta service is enabled
+  async: 1
+  poll: 0

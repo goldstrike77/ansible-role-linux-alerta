@@ -1,5 +1,5 @@
 [uwsgi]
-chdir = /data/nginx/site/alerta
+chdir = /data/nginx/site/{{ alerta_ngx_domain }}
 mount = /api=wsgi.py
 callable = app
 manage-script-name = true
@@ -10,7 +10,7 @@ logger = syslog:alertad
 log-4xx = true
 log-5xx = true
 disable-logging = true
-https = {{ ansible_default_ipv4.address }}:{{ alerta_port_arg.api }},/etc/nginx/ssl/alerta.crt,/etc/nginx/ssl/alerta.key,HIGH,/etc/nginx/ssl/ca-cert.pem
+https = {{ ansible_default_ipv4.address }}:{{ alerta_port_arg.api }},/etc/nginx/ssl/{{ alerta_ngx_domain }}.crt,/etc/nginx/ssl/{{ alerta_ngx_domain }}.key,HIGH,/etc/nginx/ssl/ca-cert.pem
 uid = nobody
 gid = nobody
 vacuum = true

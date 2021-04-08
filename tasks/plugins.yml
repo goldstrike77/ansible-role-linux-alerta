@@ -15,13 +15,9 @@
 - name: Install Alerta dependence plugins.
   pip:
     name: 'file:///tmp/{{ item }}'
-#    name: 'https://github.com/alerta/alerta-contrib.git#subdirectory=plugins/{{ item }}'
     state: 'present'
     executable: '/usr/bin/pip3.6'
   environment:
     no_proxy: '*'
   loop: "{{ alerta_plugin_list }}"
-  register: alerta_plugins_update
-  until: alerta_plugins_update is succeeded
-  retries: 50
-  delay: 2
+  notify: Enable alerta service.

@@ -49,6 +49,7 @@ There are some variables in defaults/main.yml which can (Or needs to) be overrid
 * `alerta_version`: Specify the Alerta version.
 * `alerta_admin_user`: Alerta Superuser name.
 * `alerta_admin_pass`: Alerta Superuser password.
+* `alerta_ngx_domain`: Defines domain name.
 * `alerta_incident_levels_map`: Defines the display mode of incident alarm, severity or priority.
 
 ##### Role dependencies
@@ -124,15 +125,16 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
-alerta_version: '8.3.3'
+alerta_version: '8.4.1'
 alerta_admin_user: 'admin'
 alerta_admin_pass: 'changeme'
+alerta_ngx_domain: 'alerta.example.com'
 alerta_incident_levels_map: 'severity'
 alerta_mongod_dept: true
 alerta_ngx_dept: true
 alerta_port_arg:
-  api: '19199'
-  webui: '19198'
+  api: '7443'
+  webui: '8443'
 alerta_mongod_auth: true
 alerta_mongod_hosts: 'localhost'
 alerta_mongod_node_role: 'replica'
