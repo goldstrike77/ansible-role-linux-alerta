@@ -45,7 +45,6 @@ The following list of supported the alerta releases:
 ### Main parameters #
 There are some variables in defaults/main.yml which can (Or needs to) be overridden:
 ##### General parameters
-* `alerta_version`: Specify the Alerta version.
 * `alerta_admin_user`: Alerta Superuser name.
 * `alerta_admin_pass`: Alerta Superuser password.
 * `alerta_ngx_domain`: Defines domain name.
@@ -124,7 +123,6 @@ Including an example of how to use your role (for instance, with variables passe
 You can also use the group_vars or the host_vars files for setting the variables needed for this role. File you should change: group_vars/all or host_vars/`group_name`.
 
 ```yaml
-alerta_version: '8.4.1'
 alerta_admin_user: 'admin'
 alerta_admin_pass: 'changeme'
 alerta_ngx_domain: 'alerta.example.com'

@@ -39,6 +39,7 @@ LOG_MAX_BYTES = {{ alerta_arg.log_max_mib }}*1024*1024
 LOG_BACKUP_COUNT = {{ alerta_arg.log_backup_count }}
 LOG_FORMAT = '{{ alerta_arg.log_format }}'
 ALLOWED_ENVIRONMENTS = ['{{ alerta_allowed_environments | list | join("','") | lower }}']
+DEFAULT_ENVIRONMENT = '{{ alerta_allowed_environments[0] | lower }}'
 {% if alerta_plugin_list is defined %}
 PLUGINS = ['{{ alerta_plugin_list | list | join("','") }}']
 PLUGINS_RAISE_ON_ERROR = False

@@ -5,9 +5,8 @@ alerta_python_dependent_packages:
   - 'pip'
   - 'setuptools_rust'
   - 'wheel'
-  - 'PyJWT==1.7.1'
   - 'alerta'
-  - 'alerta-server=={{ alerta_version }}'
+  - 'alerta-server'
   - 'uwsgi'
 
 alerta_folder:

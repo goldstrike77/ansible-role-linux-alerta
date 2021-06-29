@@ -1,7 +1,6 @@
 ---
 # General parameters #
 alerta_is_install: false # A boolean to determine whether or not to install the Alerta.
-alerta_version: '8.4.1' # Specify the Alerta version.
 alerta_admin_user: 'admin' # Alerta Superuser name.
 alerta_admin_pass: 'changeme' # Alerta Superuser password.
 alerta_ngx_domain: 'alerta.example.com' # Defines domain name.
