@@ -4,12 +4,9 @@
     alerta_plugin_list: "{{ lookup('dict', alerta_plugins, wantlist=True) | json_query('[*].key') }}"
 
 - name: Plugins package file transfer.
-  synchronize:
+  copy:
     src: 'plugins/{{ item }}'
     dest: '/tmp/'
-    owner: false
-    group: false
-    mode: 'push'
   loop: '{{ alerta_plugin_list }}'
 
 - name: Install Alerta dependence plugins.

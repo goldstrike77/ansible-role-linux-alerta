@@ -46,7 +46,7 @@ alerta_incident_priority:
 
 alerta_servers: "\
   {% set _alerta_servers = [] %}\
-  {% for host in groups[group_names[0]] %}\
+  {% for host in groups[group_names[-1]] %}\
     {% if _alerta_servers.append(hostvars[host]['ansible_host']) %}{% endif %}\
   {% endfor %}\
   {{ _alerta_servers }}"
