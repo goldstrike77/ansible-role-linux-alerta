@@ -5,11 +5,13 @@ alerta_python_dependent_packages:
   - 'pip==20.3.4'
   - 'setuptools_rust'
   - 'wheel'
-  - 'alerta'
-  - 'alerta-server'
+  - 'alerta==7.5.7'
+  - 'alerta-server==7.5.7'
   - 'uwsgi'
   - 'bson'
   - 'pymongo'
+  - 'PyJWT==1.6.1'
+  - 'flask==1.1.2'
 
 alerta_folder:
   - '/var/log/alerta'
