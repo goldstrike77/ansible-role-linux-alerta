@@ -2,12 +2,14 @@
 alerta_pypi_url: 'mirrors.aliyun.com'
 
 alerta_python_dependent_packages:
-  - 'pip'
+  - 'pip==20.3.4'
   - 'setuptools_rust'
   - 'wheel'
   - 'alerta'
   - 'alerta-server'
   - 'uwsgi'
+  - 'bson'
+  - 'pymongo'
 
 alerta_folder:
   - '/var/log/alerta'
